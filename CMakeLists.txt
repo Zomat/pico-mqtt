@@ -13,8 +13,11 @@ set(CMAKE_CXX_STANDARD 17)
 pico_sdk_init()
 
 # Tell CMake where to find the executable source file
+file(GLOB APP_SOURCES "app/*.c")
+file(GLOB APP_SOURCES "drivers/*.c")
 add_executable(${PROJECT_NAME} 
     main.c
+    ${APP_SOURCES}
 )
 
 # Create map/bin/hex/uf2 files
@@ -30,6 +33,7 @@ target_link_libraries(${PROJECT_NAME}
     pico_cyw43_arch_none
     pico_cyw43_arch_lwip_threadsafe_background
     pico_lwip_mqtt
+    hardware_i2c
 )
 
 # Enable usb output, disable uart output
